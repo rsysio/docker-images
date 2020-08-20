@@ -5,7 +5,7 @@ RUN \
   go get -u github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb; \
   go get -u github.com/brancz/gojsontoyaml
 
-FROM ubuntu:bionic
+FROM ubuntu:focal
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
