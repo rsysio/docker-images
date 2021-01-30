@@ -41,8 +41,3 @@ RUN curl -L https://github.com/instrumenta/kubeval/releases/latest/download/kube
 # latest sops
 RUN curl -Lo /usr/local/bin/sops $(curl -s https://api.github.com/repos/mozilla/sops/releases/latest | jq -r '.assets[].browser_download_url' | grep linux) \
  && chmod +x /usr/local/bin/sops
-
-
-
-
-https://get.helm.sh/helm-v3.5.1-linux-amd64.tar.gz
