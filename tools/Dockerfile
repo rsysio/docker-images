@@ -15,6 +15,8 @@ RUN apt-get update \
     git \
     zip \
     unzip \
+    build-essential \
+    jq \
     openssh-client \
  && rm -rf /var/lib/apt/lists/*
 
@@ -22,13 +24,10 @@ COPY --from=go /go/bin/jsonnet /usr/local/bin/jsonnet
 COPY --from=go /go/bin/jb /usr/local/bin/jb
 COPY --from=go /go/bin/gojsontoyaml /usr/local/bin/gojsontoyaml
 
-ENV KUBE_VERSION=1.18.6
-ENV HELM_VERSION=3.3.0
-
 RUN curl -Lo /usr/local/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" \
  && chmod +x /usr/local/bin/kubectl
 
-RUN curl -L https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz | tar xz \
+RUN curl -L https://get.helm.sh/helm-v$(curl -s https://api.github.com/repos/helm/helm/releases/latest | jq -r '.tag_name')-linux-amd64.tar.gz | tar xz \
  && mv linux-amd64/helm /usr/local/bin/helm \
  && rm -rf linux-amd64
 
