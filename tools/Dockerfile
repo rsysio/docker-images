@@ -33,3 +33,6 @@ RUN curl -L https://get.helm.sh/helm-v$(curl -s https://api.github.com/repos/hel
 
 RUN curl -L https://github.com/instrumenta/kubeval/releases/latest/download/kubeval-linux-amd64.tar.gz | tar xz \
  && mv kubeval /usr/local/bin/kubeval
+
+RUN curl -Lo /usr/local/bin/sops $(curl -s https://api.github.com/repos/mozilla/sops/releases/latest | jq -r '.assets[].browser_download_url' | grep linux) \
+ && chmod +x /usr/local/bin/sops
