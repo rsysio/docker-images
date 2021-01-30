@@ -30,7 +30,7 @@ RUN curl -Lo /usr/local/bin/kubectl "https://storage.googleapis.com/kubernetes-r
  && chmod +x /usr/local/bin/kubectl
 
 # latest helm
-RUN curl -L https://get.helm.sh/helm-v$(curl -s https://api.github.com/repos/helm/helm/releases/latest | jq -r '.tag_name')-linux-amd64.tar.gz | tar xz \
+RUN curl -L "https://get.helm.sh/helm-$(curl -s https://api.github.com/repos/helm/helm/releases/latest | jq -r '.tag_name')-linux-amd64.tar.gz" | tar xz \
  && mv linux-amd64/helm /usr/local/bin/helm \
  && rm -rf linux-amd64
 
@@ -41,3 +41,8 @@ RUN curl -L https://github.com/instrumenta/kubeval/releases/latest/download/kube
 # latest sops
 RUN curl -Lo /usr/local/bin/sops $(curl -s https://api.github.com/repos/mozilla/sops/releases/latest | jq -r '.assets[].browser_download_url' | grep linux) \
  && chmod +x /usr/local/bin/sops
+
+
+
+
+https://get.helm.sh/helm-v3.5.1-linux-amd64.tar.gz
